@@ -2,8 +2,8 @@
   <q-layout view="lHh Lpr lFf">
     <q-page-container class="q-pa-md">
       <h1 class="text-center q-my-xs primary">{{ timer }}</h1>
-      <q-dialog v-model="showInputDialog">
-        <q-card>
+      <q-dialog v-model="showInputDialog" >
+        <q-card style="width: 700px; max-width: 80vw">
           <q-card-section>
             <q-input
               v-model="myNumberInput"
@@ -37,9 +37,9 @@
       </div>
       <div v-if="myNumber && answer.join('') == myNumber">
         <div>Dobrze!</div>
-        <q-btn color="primary" class="q-mx-auto full-width" @click="reset"
-          >Reset</q-btn
-        >
+        <q-btn color="primary" class="q-mx-auto full-width" @click="reset">
+          Reset
+        </q-btn>
       </div>
       <q-btn color="primary" class="full-width" @click="showInputDialog = true">
         Start
@@ -81,6 +81,7 @@ const startGame = () => {
   if (intervalId.value > 0) {
     return;
   }
+
   timer.value = timeInput.value;
   intervalId.value = setInterval(() => {
     --timer.value;
@@ -90,10 +91,8 @@ const startGame = () => {
 const reset = () => {
   myNumber.value = "";
   answer.value = [];
-  timer.value = 60;
   clearInterval(intervalId.value);
   intervalId.value = 0;
-  startGame();
 };
 
 watch(timer, (val) => {
@@ -112,9 +111,3 @@ watch(
   { deep: true }
 );
 </script>
-<style>
-.q-dialog__inner {
-  min-width: 10000px;
-}
-
-</style>
